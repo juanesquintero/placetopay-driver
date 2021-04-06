@@ -6,6 +6,10 @@ itsdangerous==1.1.0         # For checking untrusted sources https://pypi.org/pr
 MarkupSafe==1.1.1           # For Validate HTML or XML injection https://pypi.org/project/MarkupSafe/  https://www.kite.com/python/docs/markupsafe.Markup
 Werkzeug==1.0.1
 
+# SQLAlchemy
+SQLAlchemy==1.4.3
+Flask-SQLAlchemy==2.5.1
+
 # Flask WTF Core
 Flask-WTF==0.14.3
 WTForms==2.2.1
@@ -13,9 +17,9 @@ WTForms==2.2.1
 # Extras
 python-dotenv==0.12.0
 requests==2.25.1
+DateTime==4.3
 
 # Useful Extras Libraries
 Flask-Mail==0.9.1           # For Email sender https://pypi.org/project/Flask-Mail/ https://www.youtube.com/watch?v=vF9n248M1yk python/docs/markupsafe.Markup
 Flask-Login==0.5.0          # For manage the login of the web app  https://flask-login.readthedocs.io/en/latest/   https://pypi.org/project/Flask-Login/
 email-validator==1.1.2      # For email validation https://pypi.org/project/email-validator/
-

@@ -34,7 +34,7 @@ def index():
 
 @Home.route('/status', methods=['GET'])
 def order_detail():
-    id = request.params.get('id')
+    id = request.args.get('id')
     order = Order().query.filter_by(id=id).first()
     if not order:
         flash('This order does not exist', 'danger')

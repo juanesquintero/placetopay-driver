@@ -8,6 +8,7 @@ api_client = HttpClient.get_instance()
 
 @Home.route('/', methods=('GET', 'POST'))
 def index():
+    raise Exception
     form = HomeForm()
     if form.validate_on_submit():
         flash(

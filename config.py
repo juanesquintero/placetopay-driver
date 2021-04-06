@@ -46,18 +46,18 @@ WEB_CHECKOUT_URL = os.environ.get('WEB_CHECKOUT_URL')
 WEB_CHECKOUT_LOGIN = os.environ.get('WEB_CHECKOUT_LOGIN')
 WEB_CHECKOUT_TRACK_KEY = os.environ.get('WEB_CHECKOUT_TRACK_KEY')
 
-# '''LOGGING CONFIG'''
-# LOG_FORMAT = '%(asctime)s:%(levelname)s:%(name)s:%(message)s'
-# LOG_DIR = base_dir + '/logs'
+'''LOGGING CONFIG'''
+LOG_FORMAT = '%(asctime)s:%(levelname)s:%(name)s:%(message)s'
+LOG_DIR = base_dir + '/logs'
 
 # # GENERAL LOGS (ALL)
 # logging.getLogger().setLevel(logging.DEBUG)
 # logging.basicConfig(filename=LOG_DIR+'/GENERALS.log',level=logging.DEBUG,format=LOG_FORMAT)
 
-# # ERROR LOGS
-# error_logger = logging.getLogger('error_logger')
-# error_logger.setLevel(logging.ERROR)
-# file_handler = logging.FileHandler(LOG_DIR+'/ERRORS.log')
-# file_handler.setFormatter(logging.Formatter(LOG_FORMAT))
-# error_logger.addHandler(file_handler)
-# '''END LOGGING CONFIG'''
+# ERROR LOGS
+error_logger = logging.getLogger('error_logger')
+error_logger.setLevel(logging.ERROR)
+file_handler = logging.FileHandler(LOG_DIR+'/ERRORS.log')
+file_handler.setFormatter(logging.Formatter(LOG_FORMAT))
+error_logger.addHandler(file_handler)
+'''END LOGGING CONFIG'''

@@ -1,17 +1,16 @@
 '''
-The main config file for Superset
-
-All configuration in this file can be overridden by providing a superset_config
-in your PYTHONPATH as there is a ``from superset_config import *``
-at the end of this file.
+The main config file for the appliaction,
+contains all the important constants for configuration and to make it work just fine 
 '''
 import logging
 import os
+from datetime import datetime
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
 APP_NAME = 'Virtual Shop - PlaceToPay'
 APP_ICON = '/static/img/logo.png'
+CURRENT_YEAR = datetime.now().year
 
 # Reloadn on Jinja templates change
 TEMPLATES_AUTO_RELOAD = True

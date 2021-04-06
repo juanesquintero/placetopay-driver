@@ -1,6 +1,7 @@
 '''
-Modulo que inicia y configura la Aplicación de Flask
+Initial Module for start and set up the Flask Appliaction
 '''
+import logging
 from flask import Flask, render_template
 from werkzeug.exceptions import HTTPException
 from flask_wtf.csrf import CSRFProtect
@@ -9,7 +10,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 from .utils.http_client import HttpClient
 
-import logging
 error_logger = logging.getLogger('error_logger')
 
 

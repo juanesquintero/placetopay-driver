@@ -1,6 +1,9 @@
 {% extends 'core/base.html' %} {% block content %}
 
-<h1>Order Detail!</h1>
+<h1>Order Detail!
+  <a href="{{url_for('Home.orders_list')}}" class="btn btn-outline-dark" >&#10094;</a>
+</h1>
+
 <hr />
 
 <section class="row">

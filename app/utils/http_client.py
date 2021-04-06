@@ -1,21 +1,21 @@
 from requests import get, post, put, patch, delete
 from flask import flash
 
-class APIClient():
+class HttpClient():
 
     __instance = None
 
     @staticmethod
     def get_instance():
-        return APIClient.__instance
+        return HttpClient.__instance
 
     #  Singleton definition
     def __init__(self, api_path, headers=None):
-        if APIClient.__instance is not None:
+        if HttpClient.__instance is not None:
             raise Exception('The http API client can only be instance once!')
         self.api_path = api_path
         self.headers = headers
-        APIClient.__instance = self
+        HttpClient.__instance = self
 
     def set_headers(self, headers):
         self.headers = headers

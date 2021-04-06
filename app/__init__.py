@@ -7,7 +7,7 @@ from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
-from .utils.api_client import APIClient
+from .utils.http_client import HttpClient
 
 DB = None
 
@@ -70,7 +70,7 @@ def login_manager(app):
 
 
 def api_client(app):
-    api = APIClient(app.config['WEB_CHECKOUT_URL'])
+    api = HttpClient(app.config['WEB_CHECKOUT_URL'])
     app.config['API_CLIENT'] = api
 
 

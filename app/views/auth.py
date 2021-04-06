@@ -3,12 +3,12 @@ from app.forms.auth_forms import LoginForm, RegisterForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 from app.models import User
-from app.utils.api_client import APIClient
+from app.utils.http_client import HttpClient
 from app import DB
 
 Auth = Blueprint('Auth', __name__)
 
-api_client = APIClient.get_instance()
+api_client = HttpClient.get_instance()
 
 @Auth.route('/login', methods=('GET', 'POST'))
 def login():

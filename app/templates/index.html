@@ -2,52 +2,51 @@
 
 {% block content %}
 
-
 <h1>Welcome!</h1>
 <hr>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-  optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-  obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-  nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-  tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-  quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
-  sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-  recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
-  minima nesciunt dolorem!</p>
-<br>
 
-<b>This is WTForm example!</b>
-<br><br>
+<section class="row">
 
-{% if form %}
+  <div class="col-xl-7 col-sm-12">
+    <p class="container px-5 mx-2">
+      This is Virtual Shop!! a form of electronic commerce which allows you to directly buy a good product: the "Xiaomi
+      QiCYCLE"
+      through the "PlaceToPay Web-Checkout" payment service, you can use this web app on your web browser or a mobile
+      app
+      within a webview.
+      <br>
+      <img src="{{ url_for('static', filename='/img/ebike1.jpg') }}" width="200" height="200" alt="e-Bike" />
+      <br>
+      You can make your order of thi cool bike rigth here with a few information about you, the best is that it is only
+      $500
+      USD !!!
+    </p>
+    <br>
 
-<form method="POST" action="/">
-  {{ form.csrf_token }}
-  {{ form.name.label }} {{ form.name(size=20) }}
-  <br>
-  {{ form.last_name.label }} {{ form.last_name(size=20) }}
-  <br><br>
-  <input type="submit" value="Send">
-</form>
+  </div>
 
-{% endif %}
+  <div class="col-xl-5 col-sm-12 container text-center">
+    {% if form %}
+    
+      <b>Make your order here, now!</b>
+      <br><br>
 
+      <form method="POST" action="/">
+        {{ form.csrf_token }}
+        {{ form.name.label }} {{ form.name(size=20) }}
+        <br>
+        {{ form.address.label }} {{ form.address(size=20) }}
+        <br>
+        {{ form.email.label }} {{ form.email(size=20) }}
+        <br>
+        {{ form.phone.label }} {{ form.phone(size=20) }}
+        <br><br>
+        <input type="submit" value="Buy!">
+      </form>
+    
+    {% endif %}
+  </div>
 
-<section class="container text-center">
-  <form method="GET" action="{{url_for('Home.api_call')}}">
-    <input type="submit" value="Request API">
-  </form>
-  <form method="GET" action="{{url_for('Home.api_call_fail')}}">
-    <input type="submit" value="Request API Fail">
-  </form>
 </section>
-
-
-
-{% if response %}
-{{ response }}
-{% endif %}
 
 {% endblock %}

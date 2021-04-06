@@ -26,25 +26,29 @@
   </div>
 
   <div class="col-xl-5 col-sm-12 container text-center">
-    {% if form %}
-    
-      <b>Make your order here, now!</b>
-      <br><br>
 
-      <form method="POST" action="/">
-        {{ form.csrf_token }}
-        {{ form.name.label }} {{ form.name(size=20) }}
-        <br>
-        {{ form.address.label }} {{ form.address(size=20) }}
-        <br>
-        {{ form.email.label }} {{ form.email(size=20) }}
-        <br>
-        {{ form.phone.label }} {{ form.phone(size=20) }}
-        <br><br>
-        <input type="submit" value="Buy!">
-      </form>
-    
+    <!-- ORDER REQUEST  -->
+    {% if form %}
+
+    <b>Make your order here, now!</b>
+    <br><br>
+
+    <form method="POST" action="/">
+      {{ form.csrf_token }}
+      {{ form.customer_name.label }} {{ form.customer_name(size=20) }}
+      <br>
+      {{ form.customer_address.label }} {{ form.customer_address(size=20) }}
+      <br>
+      {{ form.customer_email.label }} {{ form.customer_email(size=20) }}
+      <br>
+      {{ form.customer_mobile.label }} {{ form.customer_mobile(size=20) }}
+      <br><br>
+      <input type="submit" value="Order Now!">
+    </form>
+
     {% endif %}
+    <!-- END ORDER REQUEST  -->
+
   </div>
 
 </section>

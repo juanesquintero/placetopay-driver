@@ -99,7 +99,7 @@ def handle_errors(app):
     def handle_exception(e):
         error_logger.error('EXCEPTION: '+str(e), exc_info=True)
         err = {
-            'code': 500, 
+            'code': 500,
             'name': 'Internal Server Error',
             'description': 'An Error has occurred on the application server, you might contact the administrator for more information'
         }

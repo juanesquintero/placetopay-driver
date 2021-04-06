@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %} {% block content %}
+
+<h1>Order Detail!
+  <a href="{{url_for('Home.orders_list')}}" class="btn btn-outline-dark" >&#10094;</a>
+</h1>
+
+<hr />
+
+<section class="row">
+  <div class="col-12 container text-center">
+    <!-- ORDER RESUME  -->
+    {% if order %}
+
+    <fieldset>
+      <legend>Customer Information</legend>
+      <b>Name:</b> {{ order.customer_name }}
+      <br />
+      <b>Address:</b> {{ order.customer_address }}
+      <br />
+      <b>Email:</b> {{ order.customer_email }}
+      <br />
+      <b>Mobile:</b> {{ order.customer_mobile }}
+      <br />
+    </fieldset>
+    
+    <br />
+
+    <fieldset>
+      <legend>Product Information</legend>
+      {{ product.name }}
+      <br />
+      {{ product.price }} USD
+      <br />
+      Warranty: {{ product.warranty }} Months
+      <br />
+    </fieldset>
+    Shipping Cost: 0 USD
+
+    <br />
+    <br />
+
+    <b>Status</b>: <i>{{ order.status }}</i>
+    <br />
+    <b>Created</b>: {{ order.created_at }}
+    <br />
+    <b>Updated</b>: {% if order.updated_at %} {{ order.updated_at }}  {% else %} - {% endif %} <br /><br />
+
+    {% endif %}
+    <!-- END - ORDER RESUME  -->
+  </div>
+</section>
+
+{% endblock %}

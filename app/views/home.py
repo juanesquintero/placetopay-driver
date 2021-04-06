@@ -32,15 +32,24 @@ def index():
     return render_template('index.html', form=form)
 
 
+@Home.route('/orders', methods=['GET'])
+def orders_list():
+    orders = Order().query.all()
+    if not orders:
+        flash('There are not orders yet :(', 'alert')
+    return render_template('list.html', orders_list=orders)
+
+
 @Home.route('/status', methods=['GET'])
 def order_detail():
-    id = request.params.get('id')
-    order = Order().query.filter_by(id=id).first()
+    order_id = request.args.get('id')
+    order = Order().query.filter_by(id=order_id).first()
     if not order:
-        flash('This order does not exist', 'danger')
+        flash('This order does not exist', 'alert')
     return render_template('detail.html', order=order, product=PRODUCT if order else None)
 
 
-@Home.route('/pay', methods=['GET'])
+
+@Home.route('/pay', methods=['POST'])
 def payment():
     return render_template('index.html')

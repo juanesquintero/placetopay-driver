@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<h1>Order Detail!</h1>
+<hr>
+
+<section class="row">
+
+  <div class="col-12 container text-center">
+
+    <!-- ORDER RESUME  -->
+    {% if order %}
+
+    <form method="POST" action="/pay">
+      <fieldset>
+        <legend>Customer Information</legend>
+        {{ order.customer_name }} 
+        <br>
+        {{ order.customer_address }} 
+        <br>
+        {{ order.customer_email }} 
+        <br>
+        {{ order.customer_mobile }} 
+        <br>
+      </fieldset>
+      <br>
+      <fieldset>
+        <legend>Product Information</legend>
+        Name: {{ product.name }}
+        <br>
+        Price: {{ product.price }} USD
+        <br>
+        Warranty: {{ product.warranty }} Months
+        <br>
+      </fieldset>
+      Shipping Cost: 0 USD
+      <br>
+      Staus: <b>{{ order.status }}</b>
+      <br>
+      Created: {{ order.created_at }}
+      <br>
+      Updated: {{ order.updated_at }}
+      <br><br>
+      <input type="submit" value="Make your Payment!">
+    </form>
+
+    {% endif %}
+    <!-- END - ORDER RESUME  -->
+
+  </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+# Flask Core
+click==7.1.2
+Flask==1.1.2
+Jinja2==2.11.3
+itsdangerous==1.1.0         # For checking untrusted sources https://pypi.org/project/itsdangerous/   https://www.kite.com/python/docs/itsdangerous           # For Email sender https://pypi.org/project/Flask-Mail/ https://www.youtube.com/watch?v=vF9n248M1yk 
+MarkupSafe==1.1.1           # For Validate HTML or XML injection https://pypi.org/project/MarkupSafe/  https://www.kite.com/python/docs/markupsafe.Markup
+Werkzeug==1.0.1
+
+# SQLAlchemy
+SQLAlchemy==1.4.3
+Flask-SQLAlchemy==2.5.1
+
+# Flask WTF Core
+Flask-WTF==0.14.3
+WTForms==2.2.1
+
+# Extras
+python-dotenv==0.12.0
+requests==2.25.1
+
+# Useful Extras Libraries
+Flask-Mail==0.9.1           # For Email sender https://pypi.org/project/Flask-Mail/ https://www.youtube.com/watch?v=vF9n248M1yk python/docs/markupsafe.Markup
+Flask-Login==0.5.0          # For manage the login of the web app  https://flask-login.readthedocs.io/en/latest/   https://pypi.org/project/Flask-Login/
+email-validator==1.1.2      # For email validation https://pypi.org/project/email-validator/
+
+# Dev Libraries
+flask-unittest==0.1.1
+unittest2==1.1.0
+pylint==2.5.0
+pylint-flask==0.6
+pylint-plugin-utils==0.6
+autopep8==1.5.6

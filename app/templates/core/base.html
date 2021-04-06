@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>{{ config.APP_NAME }}</title>
+
+  <!-- TODO define styles -->
+  <!-- meta -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  {% block meta %}{% endblock %}
+
+
+  <!-- TODO define links such as styles -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet" media="screen">
+
+  {% block links %}{% endblock %}
+
+</head>
+
+<body>
+
+  {% include 'components/header.html' %}
+
+  <div class="container my-5">
+
+    <!--  Flash messages -->
+    {% include 'components/messages.html' %}
+
+    <!-- Main Content -->
+
+    {% block content %}{% endblock %}
+
+  </div>
+
+  {% include 'components/footer.html' %}

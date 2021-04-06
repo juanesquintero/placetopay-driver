@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<form method="POST" action="{{url_for('Auth.register')}}">
+    {{ form.csrf_token }}
+    {{ form.name.label }} {{ form.name(size=50) }}
+    <br>
+    {{ form.username.label }} {{ form.username(size=20) }}
+    <br>
+    {{ form.password.label }} {{ form.password(size=20) }}
+    <br>
+    {{ form.confirm_password.label }} {{ form.confirm_password(size=20) }}
+    <br>
+    <!-- { form.recaptcha.label } { form.recaptcha }
+    <br><br> -->
+    <input type="submit" value="Sing Up">
+</form>
+
+{% endblock %}

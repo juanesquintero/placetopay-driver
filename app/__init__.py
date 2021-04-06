@@ -11,9 +11,6 @@ from flask_sqlalchemy import SQLAlchemy
 from .utils.http_client import HttpClient
 
 error_logger = logging.getLogger('error_logger')
-
-
-
 DB = None
 
 

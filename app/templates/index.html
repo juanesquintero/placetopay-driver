@@ -49,39 +49,6 @@
     {% endif %}
     <!-- END ORDER REQUEST  -->
 
-
-    <!-- ORDER RESUME  -->
-    {% if resume %}
-
-    <b>Order Resume</b>
-    <br><br>
-
-    <form method="POST" action="/pay">
-      {{ form.csrf_token }}
-      <fieldset>
-        <legend>Customer Information</legend>
-        {{ resume.customer_name.label }} {{ resume.customer_name(size=20) }}
-        <br>
-        {{ resume.customer_address.label }} {{ resume.customer_address(size=20) }}
-        <br>
-        {{ resume.customer_email.label }} {{ resume.customer_email(size=20) }}
-        <br>
-        {{ resume.customer_mobile.label }} {{ resume.customer_mobile(size=20) }}
-        <br>
-      </fieldset>
-      <fieldset>
-        <legend>Product Information</legend>
-        Name: {{ product.name }}
-        Price: {{ product.price }}
-        Warranty: {{ product.warranty }}
-      </fieldset>
-      Shipping Cost: $0 :)
-      <input type="submit" value="Order Now!">
-    </form>
-
-    {% endif %}
-    <!-- END - ORDER RESUME  -->
-
   </div>
 
 </section>

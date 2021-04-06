@@ -26,25 +26,62 @@
   </div>
 
   <div class="col-xl-5 col-sm-12 container text-center">
-    {% if form %}
-    
-      <b>Make your order here, now!</b>
-      <br><br>
 
-      <form method="POST" action="/">
-        {{ form.csrf_token }}
-        {{ form.name.label }} {{ form.name(size=20) }}
-        <br>
-        {{ form.address.label }} {{ form.address(size=20) }}
-        <br>
-        {{ form.email.label }} {{ form.email(size=20) }}
-        <br>
-        {{ form.phone.label }} {{ form.phone(size=20) }}
-        <br><br>
-        <input type="submit" value="Buy!">
-      </form>
-    
+    <!-- ORDER REQUEST  -->
+    {% if form %}
+
+    <b>Make your order here, now!</b>
+    <br><br>
+
+    <form method="POST" action="/">
+      {{ form.csrf_token }}
+      {{ form.customer_name.label }} {{ form.customer_name(size=20) }}
+      <br>
+      {{ form.customer_address.label }} {{ form.customer_address(size=20) }}
+      <br>
+      {{ form.customer_email.label }} {{ form.customer_email(size=20) }}
+      <br>
+      {{ form.customer_mobile.label }} {{ form.customer_mobile(size=20) }}
+      <br><br>
+      <input type="submit" value="Order Now!">
+    </form>
+
     {% endif %}
+    <!-- END ORDER REQUEST  -->
+
+
+    <!-- ORDER RESUME  -->
+    {% if resume %}
+
+    <b>Order Resume</b>
+    <br><br>
+
+    <form method="POST" action="/pay">
+      {{ form.csrf_token }}
+      <fieldset>
+        <legend>Customer Information</legend>
+        {{ resume.customer_name.label }} {{ resume.customer_name(size=20) }}
+        <br>
+        {{ resume.customer_address.label }} {{ resume.customer_address(size=20) }}
+        <br>
+        {{ resume.customer_email.label }} {{ resume.customer_email(size=20) }}
+        <br>
+        {{ resume.customer_mobile.label }} {{ resume.customer_mobile(size=20) }}
+        <br>
+      </fieldset>
+      <fieldset>
+        <legend>Product Information</legend>
+        Name: {{ product.name }}
+        Price: {{ product.price }}
+        Warranty: {{ product.warranty }}
+      </fieldset>
+      Shipping Cost: $0 :)
+      <input type="submit" value="Order Now!">
+    </form>
+
+    {% endif %}
+    <!-- END - ORDER RESUME  -->
+
   </div>
 
 </section>

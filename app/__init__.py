@@ -70,7 +70,7 @@ def login_manager(app):
 
 
 def api_client(app):
-    api = APIClient(app.config['API_PATH'])
+    api = APIClient(app.config['WEB_CHECKOUT_URL'])
     app.config['API_CLIENT'] = api
 
 

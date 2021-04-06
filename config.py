@@ -10,7 +10,7 @@ import os
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
-APP_NAME = 'Flask Template'
+APP_NAME = 'Virtual Shop - PlaceToPay'
 APP_ICON = '/static/img/logo.png'
 
 # Reloadn on Jinja templates change
@@ -42,7 +42,9 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Custom env vars
 API_PATH = os.environ.get('API_PATH')
-
+WEB_CHECKOUT_URL = os.environ.get('WEB_CHECKOUT_URL')
+WEB_CHECKOUT_LOGIN = os.environ.get('WEB_CHECKOUT_LOGIN')
+WEB_CHECKOUT_TRACK_KEY = os.environ.get('WEB_CHECKOUT_TRACK_KEY')
 
 # '''LOGGING CONFIG'''
 # LOG_FORMAT = '%(asctime)s:%(levelname)s:%(name)s:%(message)s'

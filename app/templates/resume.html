@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<h1>Order Resume!</h1>
+<hr>
+
+<section class="row">
+
+  <div class="col-12 container text-center">
+
+    <!-- ORDER RESUME  -->
+    {% if resume %}
+
+    <form method="POST" action="/pay">
+      {{ resume.csrf_token }}
+      <fieldset>
+        <legend>Customer Information</legend>
+        {{ resume.customer_name.label }} {{ resume.customer_name(size=20, disabled=True) }}
+        <br>
+        {{ resume.customer_address.label }} {{ resume.customer_address(size=20, disabled=True) }}
+        <br>
+        {{ resume.customer_email.label }} {{ resume.customer_email(size=20, disabled=True) }}
+        <br>
+        {{ resume.customer_mobile.label }} {{ resume.customer_mobile(size=20, disabled=True) }}
+        <br>
+      </fieldset>
+      <br>
+      <fieldset>
+        <legend>Product Information</legend>
+        Name: {{ product.name }}
+        <br>
+        Price: {{ product.price }} USD
+        <br>
+        Warranty: {{ product.warranty }} Months
+        <br>
+      </fieldset>
+      Shipping Cost: 0 USD
+      <br><br>
+      <input type="submit" value="Make your Payment!">
+    </form>
+
+    {% endif %}
+    <!-- END - ORDER RESUME  -->
+
+  </div>
+
+</section>
+
+{% endblock %}

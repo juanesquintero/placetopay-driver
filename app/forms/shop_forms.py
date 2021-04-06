@@ -9,10 +9,10 @@ class OrderForm(FlaskForm):
     OrderForm:
     This Class defines the structure an validation to make an order of a the unique product
     '''
-    name = StringField('Name', validators=[DataRequired()])
-    address = StringField('Address', validators=[DataRequired()])
-    phone = StringField('Cell Phone', validators=[DataRequired()])
-    email = TextField(
+    customer_name = StringField('Name', validators=[DataRequired()])
+    customer_address = StringField('Address', validators=[DataRequired()])
+    customer_mobile = StringField('Mobile', validators=[DataRequired()])
+    customer_email = TextField(
         'Email',
         validators=[
             please_enter('your', 'email address'),

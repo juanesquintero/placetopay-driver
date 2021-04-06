@@ -1,17 +1,16 @@
 '''
-The main config file for Superset
-
-All configuration in this file can be overridden by providing a superset_config
-in your PYTHONPATH as there is a ``from superset_config import *``
-at the end of this file.
+The main config file for the appliaction,
+contains all the important constants for configuration and to make it work just fine 
 '''
 import logging
 import os
+from datetime import datetime
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
-APP_NAME = 'Flask Template'
+APP_NAME = 'Virtual Shop - PlaceToPay'
 APP_ICON = '/static/img/logo.png'
+CURRENT_YEAR = datetime.now().year
 
 # Reloadn on Jinja templates change
 TEMPLATES_AUTO_RELOAD = True
@@ -42,20 +41,22 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Custom env vars
 API_PATH = os.environ.get('API_PATH')
+WEB_CHECKOUT_URL = os.environ.get('WEB_CHECKOUT_URL')
+WEB_CHECKOUT_LOGIN = os.environ.get('WEB_CHECKOUT_LOGIN')
+WEB_CHECKOUT_TRACK_KEY = os.environ.get('WEB_CHECKOUT_TRACK_KEY')
 
-
-# '''LOGGING CONFIG'''
-# LOG_FORMAT = '%(asctime)s:%(levelname)s:%(name)s:%(message)s'
-# LOG_DIR = base_dir + '/logs'
+'''LOGGING CONFIG'''
+LOG_FORMAT = '%(asctime)s:%(levelname)s:%(name)s:%(message)s'
+LOG_DIR = base_dir + '/logs'
 
 # # GENERAL LOGS (ALL)
 # logging.getLogger().setLevel(logging.DEBUG)
 # logging.basicConfig(filename=LOG_DIR+'/GENERALS.log',level=logging.DEBUG,format=LOG_FORMAT)
 
-# # ERROR LOGS
-# error_logger = logging.getLogger('error_logger')
-# error_logger.setLevel(logging.ERROR)
-# file_handler = logging.FileHandler(LOG_DIR+'/ERRORS.log')
-# file_handler.setFormatter(logging.Formatter(LOG_FORMAT))
-# error_logger.addHandler(file_handler)
-# '''END LOGGING CONFIG'''
+# ERROR LOGS
+error_logger = logging.getLogger('error_logger')
+error_logger.setLevel(logging.ERROR)
+file_handler = logging.FileHandler(LOG_DIR+'/ERRORS.log')
+file_handler.setFormatter(logging.Formatter(LOG_FORMAT))
+error_logger.addHandler(file_handler)
+'''END LOGGING CONFIG'''

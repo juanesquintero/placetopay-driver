@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, flash
 from app.forms.home_forms import HomeForm
-from app.utils.api_client import APIClient
+from app.utils.http_client import HttpClient
 
 Home = Blueprint('Home', __name__)
 
-api_client = APIClient.get_instance()
+api_client = HttpClient.get_instance()
 
 @Home.route('/', methods=('GET', 'POST'))
 def index():

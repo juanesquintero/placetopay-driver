@@ -43,7 +43,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 API_PATH = os.environ.get('API_PATH')
 WEB_CHECKOUT_URL = os.environ.get('WEB_CHECKOUT_URL')
 WEB_CHECKOUT_LOGIN = os.environ.get('WEB_CHECKOUT_LOGIN')
-WEB_CHECKOUT_TRACK_KEY = os.environ.get('WEB_CHECKOUT_TRACK_KEY')
+WEB_CHECKOUT_SECRET_KEY = os.environ.get('WEB_CHECKOUT_SECRET_KEY')
 
 '''LOGGING CONFIG'''
 LOG_FORMAT = '%(asctime)s:%(levelname)s:%(name)s:%(message)s'

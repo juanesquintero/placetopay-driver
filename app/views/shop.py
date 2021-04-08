@@ -2,7 +2,7 @@ import socket
 import logging
 from datetime import datetime, timedelta
 
-from flask import Blueprint, render_template, flash, request, current_app, redirect
+from flask import Blueprint, render_template, flash, request, current_app, redirect, session
 from app.forms.shop_forms import OrderForm
 from app.utils.http_client import HttpClient
 
@@ -46,7 +46,7 @@ def order_detail():
     order_id = request.args.get('id')
     order = Order().query.filter_by(id=order_id).first()
     if not order:
-        flash('This order does not exist', 'alert')
+        flash('This order does not exist', 'warning')
     return render_template('orders/detail.html', order=order, product=PRODUCT if order else None)
 
 
@@ -60,12 +60,23 @@ def create_request():
         # Create and save user
         saved = insert_row_from_form(Order, order)
         if saved:
+            session['requestId'] = res['requestId']
             return redirect(res['processUrl'])
         else:
             flash(
                 f'Your order could not be saved, {order.customer_name.data}! ',
                 'danger')
     
+    return render_template('index.html')
+
+
+@Shop.route('/answer-transaction', methods=['GET'])
+def answer_transaction():
+    if 'requestId' in session.keys():
+       flash('This is your webcheckout requestId is: {}'.format(session['requestId']), 'info')
+       del session['requestId']
+    else:
+        flash('There is none order-payment in progress', 'danger')
     return render_template('index.html')
 
 

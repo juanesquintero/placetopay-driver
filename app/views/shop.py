@@ -61,6 +61,9 @@ def create_request():
         saved = insert_row_from_form(Order, order)
         if saved:
             session['requestId'] = res['requestId']
+            Order.update()\
+                .where(Order.c.id == saved)\
+                .values(payment_request_id = res['requestId'])
             return redirect(res['processUrl'])
         else:
             flash(
@@ -73,8 +76,9 @@ def create_request():
 @Shop.route('/answer-transaction', methods=['GET'])
 def answer_transaction():
     if 'requestId' in session.keys():
-       flash('This is your webcheckout requestId is: {}'.format(session['requestId']), 'info')
-       del session['requestId']
+        # render_template('index.html')
+        flash('This is your webcheckout requestId is: {}'.format(session['requestId']), 'info')
+        del session['requestId']
     else:
         flash('There is none order-payment in progress', 'danger')
     return render_template('index.html')

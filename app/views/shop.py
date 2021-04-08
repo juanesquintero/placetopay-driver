@@ -7,14 +7,14 @@ from app.utils.mixins import insert_row_from_form, generate_auth_webcheckout
 
 from datetime import datetime
 
-Home = Blueprint('Home', __name__)
+Shop = Blueprint('Shop', __name__)
 
 api_client = api_client = current_app.config['API_CLIENT']
 
 PRODUCT = dict(name='Xiaomi QiCYCLE', price=500, warranty=3)
 
 
-@Home.route('/', methods=['GET', 'POST'])
+@Shop.route('/', methods=['GET', 'POST'])
 def index():
     form = OrderForm()
 
@@ -38,7 +38,7 @@ def index():
     return render_template('index.html', form=form)
 
 
-@Home.route('/orders', methods=['GET'])
+@Shop.route('/orders', methods=['GET'])
 def orders_list():
     orders = Order().query.all()
     if not orders:
@@ -46,7 +46,7 @@ def orders_list():
     return render_template('list.html', orders_list=orders)
 
 
-@Home.route('/status', methods=['GET'])
+@Shop.route('/status', methods=['GET'])
 def order_detail():
     order_id = request.args.get('id')
     order = Order().query.filter_by(id=order_id).first()
@@ -55,9 +55,8 @@ def order_detail():
     return render_template('detail.html', order=order, product=PRODUCT if order else None)
 
 
-@Home.route('/pay', methods=['POST', 'GET'])
+@Shop.route('/pay', methods=['POST', 'GET'])
 def payment():
     auth = generate_auth_webcheckout(current_app.config['WEB_CHECKOUT_LOGIN'], current_app.config['WEB_CHECKOUT_SECRET_KEY'])
-    print(dict(auth=auth))
     res = api_client.post('session', dict(auth=auth))
     return render_template('index.html')

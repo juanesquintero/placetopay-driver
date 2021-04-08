@@ -1,2 +1,2 @@
-from .home import Home
+from .shop import Shop
 from .auth import Auth

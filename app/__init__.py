@@ -74,18 +74,18 @@ def login_manager(app):
 
 
 def api_client(app):
-    api = HttpClient(app.config['WEB_CHECKOUT_URL'])
+    api = HttpClient(app.config['WEB_CHECKOUT_URL'], {'Content-type': 'application/json'})
     app.config['API_CLIENT'] = api
 
 
 def register_routes(app):
+    with app.app_context():
+        # Import views as blueprints
+        from .views import Shop, Auth
+        # Register blueprints.
+        app.register_blueprint(Shop)
+        app.register_blueprint(Auth)
     # Import views as blueprints
-    from .views import Shop, Auth
-
-    # Register blueprints.
-    app.register_blueprint(Shop)
-    app.register_blueprint(Auth)
-
 
 def handle_errors(app):
     # Error handlers.

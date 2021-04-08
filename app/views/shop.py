@@ -1,13 +1,15 @@
-from flask import Blueprint, render_template, flash, request
+from flask import Blueprint, render_template, flash, request, current_app
 from app.forms.shop_forms import OrderForm
 from app.utils.http_client import HttpClient
 from app.models import Order
 
-from app.utils.mixins import insert_row_from_form
+from app.utils.mixins import insert_row_from_form, generate_auth_webcheckout
+
+from datetime import datetime
 
 Shop = Blueprint('Shop', __name__)
 
-api_client = HttpClient.get_instance()
+api_client = api_client = current_app.config['API_CLIENT']
 
 PRODUCT = dict(name='Xiaomi QiCYCLE', price=500, warranty=3)
 
@@ -21,9 +23,13 @@ def index():
             # Create and save user
             saved = insert_row_from_form(Order, form)
             if saved:
-                flash(f'Check your order carefully before go to pay, {form.customer_name.data}! ', 'info')
+                flash(
+                    f'Check your order carefully before go to pay, {form.customer_name.data}! ', 
+                    'info')
             else:
-                flash(f'Your order could not be saved, {form.customer_name.data}! ', 'danger')
+                flash(
+                    f'Your order could not be saved, {form.customer_name.data}! ',
+                    'danger')
         else:
             form = None
             flash('There is an error on the order form', 'danger')
@@ -49,6 +55,8 @@ def order_detail():
     return render_template('detail.html', order=order, product=PRODUCT if order else None)
 
 
-@Shop.route('/pay', methods=['POST'])
+@Shop.route('/pay', methods=['POST', 'GET'])
 def payment():
+    auth = generate_auth_webcheckout(current_app.config['WEB_CHECKOUT_LOGIN'], current_app.config['WEB_CHECKOUT_SECRET_KEY'])
+    res = api_client.post('session', dict(auth=auth))
     return render_template('index.html')

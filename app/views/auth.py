@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, flash, url_for
+from flask import Blueprint, render_template, redirect, flash, url_for, current_app
 from app.forms.auth_forms import LoginForm, RegisterForm
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -8,7 +8,7 @@ from app import DB
 
 Auth = Blueprint('Auth', __name__)
 
-api_client = HttpClient.get_instance()
+api_client = current_app.config['API_CLIENT']
 
 @Auth.route('/login', methods=('GET', 'POST'))
 def login():

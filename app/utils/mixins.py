@@ -3,30 +3,39 @@
 import logging
 import hashlib
 import base64
+import secrets
+from random import randint
 from datetime import datetime
+
 from wtforms.validators import DataRequired
 from app import DB
 
 
 error_logger = logging.getLogger('error_logger')
 
-def convert_to_sha1(word):
-    digest = hashlib.sha1(word.encode()).hexdigest()
+def sha1_encode(word):
+    word_encoded = word.encode()
+    digest = hashlib.sha1(word_encoded)
     return digest
 
-def  convert_to_base64(word):
-    base_64 = base64.b64encode(word.encode())
+def  base64_encode(word):
+    word_encoded = word.encode()
+    base_64 = base64.b64encode(word_encoded)
     return base_64.decode()
 
-def generate_auth_webcheckout(login, secretkey):
-    seed = datetime.now().strftime('%Y-%m-%dT%H:%M:%S-5:00')
-    nonce = 'c9085e82debb82b0955579098be3d7ca'
-    tran_key = convert_to_base64(convert_to_sha1(str(nonce + seed + secretkey)))
+def sha1_and_base64_encode(word):
+    sha1_digest = hashlib.sha1(word.encode()).digest()
+    base64_encode_sha1 = base64.b64encode(sha1_digest)
+    return base64_encode_sha1.decode()
 
+def generate_auth_webcheckout(login, secretkey):
+    nonce = secrets.token_hex(nbytes=randint(0, 10))
+    seed = datetime.now().strftime('%Y-%m-%dT%H:%M:%S-5:00')
+    tran_key = sha1_and_base64_encode(nonce + seed + secretkey)
     auth = dict(
         login=login,
         tranKey=tran_key,
-        nonce=convert_to_base64(nonce),
+        nonce=base64_encode(nonce),
         seed=seed
     )
 

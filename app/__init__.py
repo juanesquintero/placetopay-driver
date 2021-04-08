@@ -80,10 +80,10 @@ def api_client(app):
 
 def register_routes(app):
     # Import views as blueprints
-    from .views import Home, Auth
+    from .views import Shop, Auth
 
     # Register blueprints.
-    app.register_blueprint(Home)
+    app.register_blueprint(Shop)
     app.register_blueprint(Auth)
 
 

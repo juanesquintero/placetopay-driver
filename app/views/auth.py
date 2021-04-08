@@ -13,7 +13,7 @@ api_client = HttpClient.get_instance()
 @Auth.route('/login', methods=('GET', 'POST'))
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('Home.index'))
+        return redirect(url_for('Shop.index'))
 
     form = LoginForm()
 
@@ -25,7 +25,7 @@ def login():
         if user and valid_password:
             login_current_user(user)
             flash(f'Welcome {form.username.data}! ', 'info')
-            return redirect(url_for('Home.index'))
+            return redirect(url_for('Shop.index'))
 
         flash('Invalid credentials! ', 'danger')
 
@@ -34,7 +34,7 @@ def login():
 @Auth.route('/register', methods=('GET', 'POST'))
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('Home.index'))
+        return redirect(url_for('Shop.index'))
     form = RegisterForm()
     if form.validate_on_submit():
         # Create and save user
@@ -50,11 +50,11 @@ def register():
             DB.session.commit()
         except Exception as e:
             flash('Your are already singed up! Please login!', 'danger')
-            return redirect(url_for('Home.index'))
+            return redirect(url_for('Shop.index'))
 
         login_current_user(user)
         flash(f'Your are now singed up! {form.name.data} ({form.username.data})', 'success')
-        return redirect(url_for('Home.index'))
+        return redirect(url_for('Shop.index'))
 
         
     return render_template('auth/register.html', form=form)
@@ -64,7 +64,7 @@ def register():
 def logout():
     logout_user()
     api_client.set_headers(None)
-    return redirect(url_for('Home.index'))
+    return redirect(url_for('Shop.index'))
 
 
 def login_current_user(user):

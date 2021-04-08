@@ -30,7 +30,7 @@ def sha1_and_base64_encode(word):
 
 def auth_webcheckout(login, secretkey):
     nonce = secrets.token_hex(nbytes=randint(0, 10))
-    seed = datetime.now().strftime('%Y-%m-%dT%H:%M:%S-5:00')
+    seed = get_current_date()
     tran_key = sha1_and_base64_encode(nonce + seed + secretkey)
     auth = dict(
         login=login,
@@ -52,15 +52,13 @@ def buyer_webcheckout(order):
     )
     return buyer
 
-def payment_webcheckout(order):
+def payment_webcheckout(form, currency):
     payment = dict(
-        reference=order.customer_email.data + datetime.now(),
-        description= f'''{order.product_name.data}
-                        price:{order.product_price.data} 
-                        warranty:{order.product_warranty.data}''',
+        reference= secrets.token_hex(nbytes=randint(1, 5)),
+        description= '{product_name} price:{product_price} warranty:{product_warranty}'.format(**form),
         amount=dict(
-            currency='USD',
-            total=order.product_price.data
+            currency=currency,
+            total=form['product_price']
         )
     )
     return payment
@@ -81,3 +79,7 @@ def insert_row_from_form(db_model, form):
     except Exception as e:
         error_logger.error('EXCEPTION: '+str(e), exc_info=True)
         return False
+
+
+def get_current_date():
+    return datetime.now().strftime('%Y-%m-%dT%H:%M:%S-5:00')

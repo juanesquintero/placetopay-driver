@@ -16,30 +16,31 @@
       {{ resume.csrf_token }}
       <fieldset>
         <legend>Customer Information</legend>
-        {{ resume.customer_name.label }} {{ resume.customer_name(size=20, disabled=True) }}
+        {{ resume.customer_name.label }} {{ resume.customer_name(size=20, readonly=True) }}
         <br>
-        {{ resume.customer_address.label }} {{ resume.customer_address(size=20, disabled=True) }}
+        {{ resume.customer_address.label }} {{ resume.customer_address(size=20, readonly=True) }}
         <br>
-        {{ resume.customer_email.label }} {{ resume.customer_email(size=20, disabled=True) }}
+        {{ resume.customer_email.label }} {{ resume.customer_email(size=20, readonly=True) }}
         <br>
-        {{ resume.customer_mobile.label }} {{ resume.customer_mobile(size=20, disabled=True) }}
+        {{ resume.customer_mobile.label }} {{ resume.customer_mobile(size=20, readonly=True) }}
         <br>
       </fieldset>
       <br>
+      
       <fieldset>
         <legend>Product Information</legend>
         <b>Name:</b> 
-        <input type="text" id="product.name" name="product_name" value="{{ product.name }}" disabled>
+        <input type="text" id="product.name" name="product_name" value="{{ product.name }}" readonly>
         <br>
         <b>Price:</b> 
-        $<input type="text" id="product.price" name="product_price" value="{{ product.price }}" disabled> USD
+        $<input type="text" id="product.price" name="product_price" value="{{ product.price }}" readonly> {{config.CURRENCY}}
         <br>
         <b>Warranty:</b> 
-        <input type="text" id="product.warranty" name="product_warranty" value="{{ product.warranty}}" disabled>
+        <input type="text" id="product.warranty" name="product_warranty" value="{{ product.warranty}}" readonly>
         <br>
       </fieldset>
       <b>Shipping Cost:</b> 
-      $ <input type="text" id="product.shipping" name="product_shipping" value="0"> USD
+      $ <input type="text" id="product.shipping" name="product_shipping" value="0" readonly> {{config.CURRENCY}}
       <br><br>
       <input type="submit" value="Make your Payment!">
     </form>

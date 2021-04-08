@@ -28,7 +28,7 @@ def sha1_and_base64_encode(word):
     base64_encode_sha1 = base64.b64encode(sha1_digest)
     return base64_encode_sha1.decode()
 
-def generate_auth_webcheckout(login, secretkey):
+def auth_webcheckout(login, secretkey):
     nonce = secrets.token_hex(nbytes=randint(0, 10))
     seed = datetime.now().strftime('%Y-%m-%dT%H:%M:%S-5:00')
     tran_key = sha1_and_base64_encode(nonce + seed + secretkey)
@@ -40,6 +40,30 @@ def generate_auth_webcheckout(login, secretkey):
     )
 
     return auth
+
+def buyer_webcheckout(order):
+    buyer = dict(
+        name=order.customer_name.data,
+        surname='XiaomiShop',
+        email=order.customer_email.data,
+        document='2131231',
+        documentType='CC',
+        mobile=order.customer_mobile.data,
+    )
+    return buyer
+
+def payment_webcheckout(order):
+    payment = dict(
+        reference=order.customer_email.data + datetime.now(),
+        description= f'''{order.product_name.data}
+                        price:{order.product_price.data} 
+                        warranty:{order.product_warranty.data}''',
+        amount=dict(
+            currency='USD',
+            total=order.product_price.data
+        )
+    )
+    return payment
 
 def please_enter(field_name='value', connector='a', valid=False):
     if valid:

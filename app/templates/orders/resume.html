@@ -12,7 +12,7 @@
     <!-- ORDER RESUME  -->
     {% if resume %}
 
-    <form method="POST" action="/pay">
+    <form method="POST" action="{{url_for('Shop.create_request')}}">
       {{ resume.csrf_token }}
       <fieldset>
         <legend>Customer Information</legend>
@@ -28,14 +28,18 @@
       <br>
       <fieldset>
         <legend>Product Information</legend>
-        <b>Name:</b> {{ product.name }}
+        <b>Name:</b> 
+        <input type="text" id="product.name" name="product_name" value="{{ product.name }}" disabled>
         <br>
-        <b>Price:</b> $ {{ product.price }} USD
+        <b>Price:</b> 
+        $<input type="text" id="product.price" name="product_price" value="{{ product.price }}" disabled> USD
         <br>
-        <b>Warranty:</b> {{ product.warranty }} Months
+        <b>Warranty:</b> 
+        <input type="text" id="product.warranty" name="product_warranty" value="{{ product.warranty}}" disabled>
         <br>
       </fieldset>
-      <b>Shipping Cost:</b> $ 0 USD
+      <b>Shipping Cost:</b> 
+      $ <input type="text" id="product.shipping" name="product_shipping" value="0"> USD
       <br><br>
       <input type="submit" value="Make your Payment!">
     </form>

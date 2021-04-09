@@ -17,9 +17,10 @@ https://placetopay.github.io/web-checkout-api-docs/#webcheckout
 <br>
 
 To run the project you have to...
-1. Create and activate a virtual env
-2. Install dependencies with the requirements-dev.txt
-3. Run the project with flask run command
+1. Install Python 3.8 and pip  
+2. Create and activate a virtual env
+3. Install dependencies with the requirements-dev.txt
+4. Run the project with flask run command on the root folder
 
 Down here are more specification about the project base and the steps mencionated before 
 

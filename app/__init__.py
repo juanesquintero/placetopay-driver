@@ -15,12 +15,12 @@ error_logger = logging.getLogger('error_logger')
 DB = None
 
 
-def create_app(testing=False):
+def create_app():
     # Instantiate app.
     app = Flask(__name__)
 
     # Set app configuration
-    config(app, testing)
+    config(app)
 
     # Handle app errors
     handle_errors(app)
@@ -43,13 +43,10 @@ def create_app(testing=False):
     return app
 
 
-def config(app, testing):
+def config(app):
 
     # Define app config
     app.config.from_object('config')
-    if testing:
-        app.config['TESTING'] = True
-        app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
 
     # Forms csrf security
     csrf = CSRFProtect()
@@ -89,11 +86,12 @@ def api_client(app):
 def register_routes(app):
     with app.app_context():
         # Import views as blueprints
-        from .views import Shop, Auth
+        from .views import order, transaction, auth
         # Register blueprints.
-        app.register_blueprint(Shop)
-        app.register_blueprint(Auth)
-    # Import views as blueprints
+        app.register_blueprint(auth)
+        app.register_blueprint(order)
+        app.register_blueprint(transaction)
+    
 
 def handle_errors(app):
     # Error handlers.

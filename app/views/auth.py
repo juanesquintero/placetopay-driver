@@ -6,14 +6,14 @@ from app.models import User
 from app.utils.http_client import HttpClient
 from app import DB
 
-Auth = Blueprint('Auth', __name__)
+auth = Blueprint('auth', __name__)
 
 api_client = current_app.config['API_CLIENT']
 
-@Auth.route('/login', methods=('GET', 'POST'))
+@auth.route('/login', methods=('GET', 'POST'))
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('Shop.index'))
+        return redirect(url_for('order.index'))
 
     form = LoginForm()
 
@@ -25,16 +25,16 @@ def login():
         if user and valid_password:
             login_current_user(user)
             flash(f'Welcome {form.username.data}! ', 'info')
-            return redirect(url_for('Shop.index'))
+            return redirect(url_for('order.index'))
 
         flash('Invalid credentials! ', 'danger')
 
     return render_template('auth/login.html', form=form)
 
-@Auth.route('/register', methods=('GET', 'POST'))
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('Shop.index'))
+        return redirect(url_for('order.index'))
     form = RegisterForm()
     if form.validate_on_submit():
         # Create and save user
@@ -50,21 +50,21 @@ def register():
             DB.session.commit()
         except Exception as e:
             flash('Your are already singed up! Please login!', 'danger')
-            return redirect(url_for('Shop.index'))
+            return redirect(url_for('order.index'))
 
         login_current_user(user)
         flash(f'Your are now singed up! {form.name.data} ({form.username.data})', 'success')
-        return redirect(url_for('Shop.index'))
+        return render_template('index.html')
 
         
     return render_template('auth/register.html', form=form)
 
-@Auth.route('/logout')
+@auth.route('/logout')
 @login_required
 def logout():
     logout_user()
     api_client.set_headers(None)
-    return redirect(url_for('Shop.index'))
+    return redirect(url_for('order.index'))
 
 
 def login_current_user(user):

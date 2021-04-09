@@ -21,7 +21,7 @@ DEBUG_TB_ENABLED = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Security of forms
-WTF_CSRF_ENABLED = True
+WTF_CSRF_ENABLED = False
 WTF_CSRF_SECRET_KEY='a csrf secret key'
 
 # Recaptcha

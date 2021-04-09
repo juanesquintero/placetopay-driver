@@ -19,13 +19,6 @@ class RegisterForm(FlaskForm):
     This Class defines the structure an validation of the SingUp form
     '''
     name = StringField('Name', validators=[please_enter('your', 'name')])
-    # email = TextField(
-    #     'Email',
-    #     validators=[
-    #         please_enter('your', 'email address'),
-    #         Email('Please enter a valid email address')
-    #     ]
-    # )
     username = TextField('Username', validators=[please_enter('username'),])
     password = PasswordField(
         'Password',
@@ -35,4 +28,11 @@ class RegisterForm(FlaskForm):
         ]
     )
     confirm_password = PasswordField()
+    # email = TextField(
+    #     'Email',
+    #     validators=[
+    #         please_enter('your', 'email address'),
+    #         Email('Please enter a valid email address')
+    #     ]
+    # )
     # recaptcha = RecaptchaField()

@@ -1,4 +1,19 @@
-# Flask Monolithic Template
+# PlaceToPay Virtual Shop 
+
+This project is a simple web app acting like a virtual shop
+with the PlaceToPay Web Checkout service. This project  is based on a Flask Monolithic template/skeleton develop by @juanesquintero, you can find the flaks templates here:
+
+https://gitlab.com/juanesquintero/flask-monolithic-template
+
+https://gitlab.com/juanesquintero/
+
+<br>
+
+This is the PlacetoPay WebCheckOut documentation
+
+https://placetopay.github.io/web-checkout-api-docs/#webcheckout
+
+<br>
 
 ## Folder structure:
 

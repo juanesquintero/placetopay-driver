@@ -7,7 +7,7 @@ from app.forms.shop_forms import OrderForm
 from app.utils.http_client import HttpClient
 
 from app.models import Order
-from app.utils.mixins import insert_row_from_form, auth_webcheckout, buyer_webcheckout, payment_webcheckout
+from app.utils.mixins import insert_row_from_form, update_record, auth_webcheckout, buyer_webcheckout, payment_webcheckout
 
 error_logger = logging.getLogger('error_logger')
 Shop = Blueprint('Shop', __name__)
@@ -47,7 +47,7 @@ def order_detail():
     order = Order().query.filter_by(id=order_id).first()
     if not order:
         flash('This order does not exist', 'warning')
-    return render_template('orders/detail.html', order=order, product=PRODUCT if order else None)
+    return render_template('orders/detail.html', order=order, product=APP_CONFIG['PRODUCT'] if order else None)
 
 
 @Shop.route('/create-request', methods=['POST'])
@@ -60,29 +60,60 @@ def create_request():
         # Create and save user
         saved = insert_row_from_form(Order, order)
         if saved:
-            session['requestId'] = res['requestId']
-            Order.update()\
-                .where(Order.c.id == saved)\
-                .values(payment_request_id = res['requestId'])
+            session['request_id'] = res['requestId']
+            session['current_order'] = saved.id
+            session['process_url'] = res['processUrl']
+            update_record(saved, 'payment_request_id', res['requestId'])
             return redirect(res['processUrl'])
         else:
             flash(
                 f'Your order could not be saved, {order.customer_name.data}! ',
                 'danger')
-    
     return render_template('index.html')
 
 
 @Shop.route('/answer-transaction', methods=['GET'])
 def answer_transaction():
-    if 'requestId' in session.keys():
-        # render_template('index.html')
-        flash('This is your webcheckout requestId is: {}'.format(session['requestId']), 'info')
-        del session['requestId']
+    status, info = '', {}
+    if 'request_id' in session.keys():
+        res = api_client.post(
+            'session/{}'.format(session['request_id']),
+            dict(
+                auth=auth_webcheckout(
+                    APP_CONFIG['WEB_CHECKOUT_LOGIN'],
+                    APP_CONFIG['WEB_CHECKOUT_SECRET_KEY'])
+            )
+        )
+        if res:
+            status = set_order_status(res)
+            info = dict(
+                status=res['status']['status'],
+                message=res['status']['message']
+            )
+        del session['request_id']
     else:
         flash('There is none order-payment in progress', 'danger')
-    return render_template('index.html')
+    return render_template(
+        'transactions/status.html',
+        status=status,
+        info=info
+    )
 
+
+def set_order_status(res):
+    transaction_status = res['status']
+    if 'fields' in res['request']:
+        session['state_process_url'] = res['request']['fields'][0]['value']
+    
+    current_order = Order().query.filter_by(id=session['current_order']).first()
+    if current_order:
+        if transaction_status['status'] == 'APPROVED':
+            order_status = 'PAYED'
+        else:
+            order_status = 'REJECTED'
+        update_record(current_order, 'status', order_status[0])
+    
+    return transaction_status['status']
 
 def create_request_body(order, form):
     try:
@@ -96,7 +127,8 @@ def create_request_body(order, form):
             auth=auth,
             buyer=buyer,
             payment=payment,
-            expiration=(datetime.now() + timedelta(minutes=10)).strftime('%Y-%m-%dT%H:%M:%S-5:00'),
+            expiration=(datetime.now() + timedelta(minutes=10)
+                        ).strftime('%Y-%m-%dT%H:%M:%S-5:00'),
             returnUrl=APP_CONFIG['APP_RETURN_URL'],
             ipAddress=socket.gethostbyname(socket.getfqdn()),
             userAgent='PlacetoPay Sandbox'

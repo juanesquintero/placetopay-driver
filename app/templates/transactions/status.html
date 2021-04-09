@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+
+<h1>Payment Status!</h1>
+<hr>
+
+<div class="justify-content-center">
+    {% if status == 'PENDING' %}
+
+    <div class="alert alert-warning" role="alert">
+        Your payment transaction is {{info.status}}
+        <br>
+        <small>( {{info.message}} )</small>
+    </div>
+    
+    <a class="btn btn-warning btn-sm" href="{{session['process_url']}}">Retry Payment</a>
+    
+    
+    {% elif status == 'APPROVED' %}
+
+    <div class="alert alert-success" role="alert">
+        Congrats!:) Your payment transaction is {{info.status}}
+        <br>
+        <small>( {{info.message}} )</small>
+    </div>
+    <a class="btn btn-info btn-sm" href="{{session['state_process_url']}}">Proof of Payment</a>
+
+    {% elif status == 'REJECTED' %}
+
+    <div class="alert alert-danger" role="alert">
+        Sorry !:) Your payment transaction is {{info.status}}
+        <br>
+        <small>( {{info.message}} )</small>
+    </div>
+    <a class="btn btn-info btn-sm" href="{{url_for('Shop.index')}}">Retry Order</a>
+    
+    {% else %}
+        Please make a order!!!
+    {% endif %}
+</div>
+
+
+{% endblock %}

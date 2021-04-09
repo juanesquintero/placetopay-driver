@@ -10,7 +10,6 @@ from datetime import datetime
 from wtforms.validators import DataRequired
 from app import DB
 
-
 error_logger = logging.getLogger('error_logger')
 
 def sha1_encode(word):
@@ -75,7 +74,17 @@ def insert_row_from_form(db_model, form):
         obj = db_model(**data)
         DB.session.add(obj)
         DB.session.commit()
-        return True
+        return obj
+    except Exception as e:
+        error_logger.error('EXCEPTION: '+str(e), exc_info=True)
+        return False
+
+def update_record(obj, field_name, new_value):
+    try:
+        current_value = getattr(obj, field_name)
+        setattr(obj, field_name, new_value)
+        DB.session.commit()
+        return obj
     except Exception as e:
         error_logger.error('EXCEPTION: '+str(e), exc_info=True)
         return False

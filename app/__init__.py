@@ -89,11 +89,12 @@ def api_client(app):
 def register_routes(app):
     with app.app_context():
         # Import views as blueprints
-        from .views import Shop, Auth
+        from .views import order, transaction, auth
         # Register blueprints.
-        app.register_blueprint(Shop)
-        app.register_blueprint(Auth)
-    # Import views as blueprints
+        app.register_blueprint(auth)
+        app.register_blueprint(order)
+        app.register_blueprint(transaction)
+    
 
 def handle_errors(app):
     # Error handlers.

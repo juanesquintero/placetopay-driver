@@ -12,7 +12,7 @@
     <!-- ORDER RESUME  -->
     {% if resume %}
 
-    <form method="POST" action="{{url_for('Shop.create_request')}}">
+    <form method="POST" action="{{url_for('transaction.create_request')}}">
       {{ resume.csrf_token }}
       <fieldset>
         <legend>Customer Information</legend>

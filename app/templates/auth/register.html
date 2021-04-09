@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="POST" action="{{url_for('Auth.register')}}">
+<form method="POST" action="{{url_for('auth.register')}}">
     {{ form.csrf_token }}
     {{ form.name.label }} {{ form.name(size=50) }}
     <br>

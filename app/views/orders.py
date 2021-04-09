@@ -31,7 +31,7 @@ def index():
 def orders_list():
     orders = Order().query.all()
     if not orders:
-        flash('There are not orders yet :(', 'alert')
+        flash('There are not orders yet :(', 'dark ')
     return render_template('orders/list.html', orders_list=orders)
 
 

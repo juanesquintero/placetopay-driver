@@ -72,10 +72,9 @@ def set_order_status(res):
     current_order = Order().query.filter_by(id=session['current_order']).first()
     if current_order:
         if transaction_status['status'] == 'APPROVED':
-            order_status = 'PAYED'
-        else:
-            order_status = 'REJECTED'
-        update_record(current_order, 'status', order_status[0])
+            update_record(current_order, 'status', 'PAYED')
+        elif transaction_status['status'] == 'REJECTED':
+            update_record(current_order, 'status', 'REJECTED')
 
     return transaction_status['status']
 

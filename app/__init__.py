@@ -2,7 +2,8 @@
 Initial Module for start and set up the Flask Appliaction
 '''
 import logging
-from flask import Flask, render_template
+from datetime import timedelta
+from flask import Flask, render_template, session
 from werkzeug.exceptions import HTTPException
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager
@@ -53,6 +54,13 @@ def config(app, testing):
     # Forms csrf security
     csrf = CSRFProtect()
     csrf.init_app(app)
+
+    # Secure Coockie Session  
+    @app.before_request
+    def make_session_permanent():
+        session.modified = True
+        session.permanent = True
+        app.permanent_session_lifetime = timedelta(hours=2)
 
 
 def set_db(app):

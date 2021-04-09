@@ -41,9 +41,14 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Custom env vars
 API_PATH = os.environ.get('API_PATH')
+
 WEB_CHECKOUT_URL = os.environ.get('WEB_CHECKOUT_URL')
 WEB_CHECKOUT_LOGIN = os.environ.get('WEB_CHECKOUT_LOGIN')
 WEB_CHECKOUT_SECRET_KEY = os.environ.get('WEB_CHECKOUT_SECRET_KEY')
+
+APP_RETURN_URL = 'http://localhost:5000/answer-transaction'
+CURRENCY = 'USD'
+PRODUCT = dict(name='Xiaomi QiCYCLE', price=500, warranty=3)
 
 '''LOGGING CONFIG'''
 LOG_FORMAT = '%(asctime)s:%(levelname)s:%(name)s:%(message)s'

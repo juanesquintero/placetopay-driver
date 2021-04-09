@@ -11,4 +11,5 @@ class Order(db.Model):
     status = db.Column(db.String(20), default='CREATED') # CREATED, PAYED, REJECTED 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=True, default=None)
+    payment_request_id = db.Column(db.Integer,  nullable=True, default=None) 
 

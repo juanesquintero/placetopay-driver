@@ -1,7 +1,8 @@
 # PlaceToPay Virtual Shop 
 
-This project is a simple web app acting like a virtual shop
-with the PlaceToPay Web Checkout service. This project  is based on a Flask Monolithic template/skeleton develop by @juanesquintero, you can find the flaks templates here:
+This project is a simple web app develop in Python Flask framework, to simulate a virtual shop integrated
+with the PlaceToPay Web Checkout service. 
+This project  is based on a Flask Monolithic template/skeleton develop by @juanesquintero, you can find the Flask templates here:
 
 https://gitlab.com/juanesquintero/flask-monolithic-template
 
@@ -15,7 +16,17 @@ https://placetopay.github.io/web-checkout-api-docs/#webcheckout
 
 <br>
 
-## Folder structure:
+To run the project you have to...
+1. Create and activate a virtual env
+2. Install dependencies with the requirements-dev.txt
+3. Run the project with flask run command
+
+Down here are more specification about the project base and the steps mencionated before 
+
+
+## Template:
+
+### Folder structure:
 
     ├───.vscode
     ├───app
@@ -44,28 +55,28 @@ https://placetopay.github.io/web-checkout-api-docs/#webcheckout
     ├───config.py
     ├───run.py / wsgi.py
 
-## Define your environment:
+### Define your environment:
 
     $ pip install virtualenv
     $ virtualenv venv
     $ source venv/Scripts/activate
 
-## Install it:
+### Install it:
 
     (venv) $ pip install -r requirements-dev.txt
     (venv) $ pip freeze
 
-## Define environment variables:
+### Define environment variables:
 
     (venv) $ touch .env
         API_PATH = ""
         SECRET_KEY = "secret"
 
-## Run it:
+### Run it:
 
     (venv) $ flask run --reload --with-threads
 
-## Parepare your Editor:
+### Parepare your Editor:
 
 Git Extensions:
 <br>
@@ -132,7 +143,7 @@ https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-color
 
 <br>
 
-## DocString template 
+### DocString template 
 
 For Python Docstring Generator VSCode extension
 
@@ -152,4 +163,4 @@ Class
     [Summary].
     '''
 
-## That's it!!
+### That's it!!

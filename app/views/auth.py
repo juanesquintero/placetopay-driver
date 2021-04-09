@@ -31,7 +31,7 @@ def login():
 
     return render_template('auth/login.html', form=form)
 
-@auth.route('/register', methods=('GET', 'POST'))
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('order.index'))
@@ -54,7 +54,7 @@ def register():
 
         login_current_user(user)
         flash(f'Your are now singed up! {form.name.data} ({form.username.data})', 'success')
-        return redirect(url_for('order.index'))
+        return render_template('index.html')
 
         
     return render_template('auth/register.html', form=form)

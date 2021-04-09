@@ -29,7 +29,7 @@ def create_request():
             session['process_url'] = res['processUrl']
             update_record(saved, 'payment_request_id', res['requestId'])
             return redirect(res['processUrl'])
-        
+    
         flash(
             f'Your order could not be saved, {order.customer_name.data}! ',
             'danger')

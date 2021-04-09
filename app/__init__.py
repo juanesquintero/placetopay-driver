@@ -15,12 +15,12 @@ error_logger = logging.getLogger('error_logger')
 DB = None
 
 
-def create_app(testing=False):
+def create_app():
     # Instantiate app.
     app = Flask(__name__)
 
     # Set app configuration
-    config(app, testing)
+    config(app)
 
     # Handle app errors
     handle_errors(app)
@@ -43,13 +43,10 @@ def create_app(testing=False):
     return app
 
 
-def config(app, testing):
+def config(app):
 
     # Define app config
     app.config.from_object('config')
-    if testing:
-        app.config['TESTING'] = True
-        app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
 
     # Forms csrf security
     csrf = CSRFProtect()

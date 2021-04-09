@@ -28,7 +28,7 @@ def sha1_and_base64_encode(word):
     return base64_encode_sha1.decode()
 
 def auth_webcheckout(login, secretkey):
-    nonce = secrets.token_hex(nbytes=randint(0, 10))
+    nonce = secrets.token_hex(nbytes=randint(10, 20))
     seed = get_current_date()
     tran_key = sha1_and_base64_encode(nonce + seed + secretkey)
     auth = dict(
@@ -70,7 +70,8 @@ def please_enter(field_name='value', connector='a', valid=False):
 def insert_row_from_form(db_model, form):
     data = form.data
     try:
-        del data['csrf_token']
+        if 'csrf_token' in data.keys():
+            del data['csrf_token']
         obj = db_model(**data)
         DB.session.add(obj)
         DB.session.commit()
